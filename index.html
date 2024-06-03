@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADELA SALSABILA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>TUGAS BESAR ARSIJARKOM MEMBUAT HOSTINGAN</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">Tentang Saya</a></li>
+                <li><a href="#projects">Proyek</a></li>
+                <li><a href="#contact">Unggah File</a></li>
+                <li><a href="#uploads">File Unggahan</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="about">
+        <h2>Tentang Saya</h2>
+        <img src="foto.jpg" width="150" height="150" alt="Foto Profil">
+        <p>Halo! Saya Adela Salsabila dengan Nomor Induk Mahasiswa 607012300096 Kelas 47-04, Prodi Sistem Informasi, Universitas Telkom, Bandung. Saya akan menjelaskan materi Arsitektur Jaringan Komputer satu perangkat jaringan komputer serta referensi, dan file langkah-langkah membuat web hosting.</p>
+    </section>
+    <section id="projects">
+        <h2>Materi Perangkat Jaringan Komputer</h2>
+        <div class="project">
+            <h3>Perangkat Akhir</h3>
+            <p>Deskripsi proyek 1.</p>
+        </div>
+        <div class="project">
+            <h3>Referensi</h3>
+            <p>Deskripsi referensi.</p>
+        </div>
+    </section>
+    <section id="contact">
+        <h2>Unggah</h2>
+        <form id="upload-form">
+            <label for="file">Unggah File:</label>
+            <input type="file" id="file" name="file" required>
+            <input type="submit" value="Kirim">
+        </form>
+    </section>
+    <section id="uploads">
+        <h2>File langkah-langkah Membuat Web Hosting</h2>
+        <ul id="file-list"></ul>
+    </section>
+    <footer>
+        <p>&copy; 2024 Adela Salsabila</p>
+    </footer>
+
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const fileInput = document.getElementById('file');
+            const fileList = document.getElementById('file-list');
+
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                const fileURL = URL.createObjectURL(file);
+                link.textContent = file.name;
+                link.href = fileURL;
+                link.target = '_blank';
+                link.download = file.name; // Menambahkan atribut download untuk mengunduh file
+                listItem.appendChild(link);
+                fileList.appendChild(listItem);
+                fileInput.value = '';
+
+                // Simpan file ke localStorage
+                let uploadedFiles = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+                uploadedFiles.push({ name: file.name, url: fileURL });
+                localStorage.setItem('uploadedFiles', JSON.stringify(uploadedFiles));
+            }
+        });
+
+        // Memuat file yang sudah diunggah saat halaman dimuat
+        window.addEventListener('DOMContentLoaded', function() {
+            const fileList = document.getElementById('file-list');
+            const uploadedFiles = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+            uploadedFiles.forEach(function(file) {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.textContent = file.name;
+                link.href = file.url;
+                link.target = '_blank';
+                link.download = file.name; // Menambahkan atribut download untuk mengunduh file
+                listItem.appendChild(link);
+
+                // Tambahkan tombol hapus
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Hapus';
+                deleteButton.addEventListener('click', function() {
+                    // Hapus file dari localStorage
+                    let updatedFiles = JSON.parse(localStorage.getItem('uploadedFiles')) || [];
+                    updatedFiles = updatedFiles.filter(function(uploadedFile) {
+                        return uploadedFile.name !== file.name;
+                    });
+                    localStorage.setItem('uploadedFiles', JSON.stringify(updatedFiles));
+                    // Hapus item dari daftar dan dari tampilan
+                    fileList.removeChild(listItem);
+                });
+                listItem.appendChild(deleteButton);
+
+                fileList.appendChild(listItem);
+            });
+        });
+    </script>
+</body>
+</html>

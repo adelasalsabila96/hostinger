@@ -1,0 +1,93 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #fff7e6;
+    color: #333;
+}
+
+header {
+    background: #f5deb3;
+    color: #333;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+section {
+    padding: 2rem;
+    border-bottom: 1px solid #ccc;
+}
+
+section h2 {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.project {
+    margin-bottom: 1rem;
+}
+
+.project img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+label {
+    display: block;
+    margin: 0.5rem 0 0.2rem;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+input[type="submit"] {
+    background: #f5deb3;
+    color: #333;
+    border: 0;
+    padding: 1rem;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+input[type="submit"]:hover {
+    background: #deb887;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background: #f5deb3;
+    color: #333;
+}
